@@ -1,10 +1,11 @@
 package com.PFE.RH.Mappers;
 
+import com.PFE.RH.DTO.AutorisationDTO;
 import com.PFE.RH.DTO.ContactDTO;
 import com.PFE.RH.DTO.PrimeDTO;
+import com.PFE.RH.Entities.Autorisation;
 import com.PFE.RH.Entities.Contact;
 import com.PFE.RH.Entities.Prime;
-import com.PFE.RH.Entities.TypePrime;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -22,6 +23,7 @@ public interface ContactMapper {
     @Mappings({
             @Mapping(source = "contact.absences", target = "absences"),
             @Mapping(source = "contact.primes", target = "primes"),
+            @Mapping(source = "contact.autorisations", target = "autorisations"),
             @Mapping(source = "contact.contactId", target = "contactId"),
             @Mapping(source = "contact.name", target = "name"),
             @Mapping(source = "contact.username", target = "username"),
@@ -33,6 +35,7 @@ public interface ContactMapper {
 
     @Mapping(target = "absences", ignore = true)
     @Mapping(target = "primes", ignore = true)
+    @Mapping(target = "autorisations", ignore = true)
     Contact contactDTOToContact(ContactDTO contactDTO);
 
     @Mappings({
@@ -57,4 +60,19 @@ public interface ContactMapper {
             @Mapping(target = "typePrime", ignore = true) // Ignore typePrime mapping
     })
     Prime primeDTOToPrime(PrimeDTO primeDTO);
+
+    @Mappings({
+            @Mapping(source = "autorisationId", target = "autorisationId"),
+            @Mapping(source = "date", target = "date"),
+            @Mapping(source = "contact.contactId", target = "contactId"),
+            @Mapping(source = "contact.name", target = "contactName")
+    })
+    AutorisationDTO autorisationToAutorisationDTO(Autorisation autorisation);
+
+    @Mappings({
+            @Mapping(source = "autorisationDTO.autorisationId", target = "autorisationId"),
+            @Mapping(source = "autorisationDTO.date", target = "date"),
+            @Mapping(source = "autorisationDTO.contactId", target = "contact.contactId")
+    })
+    Autorisation autorisationDTOToAutorisation(AutorisationDTO autorisationDTO);
 }

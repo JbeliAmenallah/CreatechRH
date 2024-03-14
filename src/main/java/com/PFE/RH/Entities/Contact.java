@@ -24,6 +24,9 @@ public class Contact {
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Prime> primes;
+
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
+    private List<Autorisation> autorisations;
     // Getters and setters
     // Omitted for brevity
 }

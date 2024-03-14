@@ -14,6 +14,7 @@ public class ContactDTO {
     private String phone;
     private List<AbsenceDTO> absences = new ArrayList<>();
     private List<PrimeDTO> primes = new ArrayList<>(); // Add list of PrimeDTO
+    private List<AutorisationDTO> autorisations = new ArrayList<>(); // Add list of AutorisationDTO
 
 
     // Getters and setters
