@@ -1,13 +1,7 @@
 package com.PFE.RH.Mappers;
 
-import com.PFE.RH.DTO.AutorisationDTO;
-import com.PFE.RH.DTO.ContactDTO;
-import com.PFE.RH.DTO.CongeDTO;
-import com.PFE.RH.DTO.PrimeDTO;
-import com.PFE.RH.Entities.Autorisation;
-import com.PFE.RH.Entities.Contact;
-import com.PFE.RH.Entities.Conge;
-import com.PFE.RH.Entities.Prime;
+import com.PFE.RH.DTO.*;
+import com.PFE.RH.Entities.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -78,21 +72,33 @@ public interface ContactMapper {
             @Mapping(source = "autorisationDTO.contactId", target = "contact.contactId")
     })
     Autorisation autorisationDTOToAutorisation(AutorisationDTO autorisationDTO);
-
     @Mappings({
             @Mapping(source = "congeId", target = "congeId"),
             @Mapping(source = "startDate", target = "startDate"),
             @Mapping(source = "endDate", target = "endDate"),
             @Mapping(source = "state", target = "state"),
-            @Mapping(target = "contactId", ignore = true) // Ignore contactId in conges
     })
-    CongeDTO congeToCongeDTO(Conge conge);
+    CongeWithHiddenContactIdDTO congeToCongeWithHiddenContactIdDTO(Conge conge);
 
     @Mappings({
-            @Mapping(source = "congeDTO.congeId", target = "congeId",ignore = true),
-            @Mapping(source = "congeDTO.startDate", target = "startDate"),
-            @Mapping(source = "congeDTO.endDate", target = "endDate"),
-            @Mapping(source = "congeDTO.state", target = "state")
+            @Mapping(source = "congeWithHiddenContactIdDTO.congeId", target = "congeId", ignore = true),
+            @Mapping(source = "congeWithHiddenContactIdDTO.startDate", target = "startDate"),
+            @Mapping(source = "congeWithHiddenContactIdDTO.endDate", target = "endDate"),
+            @Mapping(source = "congeWithHiddenContactIdDTO.state", target = "state")
     })
-    Conge congeDTOToConge(CongeDTO congeDTO);
+    Conge congeWithHiddenContactIdDTOToConge(CongeWithHiddenContactIdDTO congeWithHiddenContactIdDTO);
+    @Mappings({
+            @Mapping(source = "absenceId", target = "absenceId"),
+            @Mapping(source = "dateOfAbsence", target = "dateOfAbsence"),
+            @Mapping(source = "reason", target = "reason")
+    })
+    AbsenceWithHiddenContactIdDTO absenceToAbsenceWithHiddenContactIdDTO(Absence absence);
+
+    @Mappings({
+            @Mapping(source = "absenceWithHiddenContactIdDTO.absenceId", target = "absenceId"),
+            @Mapping(source = "absenceWithHiddenContactIdDTO.dateOfAbsence", target = "dateOfAbsence"),
+            @Mapping(source = "absenceWithHiddenContactIdDTO.reason", target = "reason")
+    })
+    Absence absenceWithHiddenContactIdDTOToAbsence(AbsenceWithHiddenContactIdDTO absenceWithHiddenContactIdDTO);
+
 }

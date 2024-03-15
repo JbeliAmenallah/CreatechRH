@@ -26,18 +26,17 @@ public class CongeService {
     private ContactRepository contactRepository;
 
     public CongeDTO saveConge(CongeDTO congeDTO) {
-        Conge conge = congeMapper.congeDTOToConge(congeDTO);
-        Optional<Contact> contactOptional = contactRepository.findById(congeDTO.getContactId());
-        if (contactOptional.isPresent()) {
-            Contact contact = contactOptional.get();
-            conge.setContact(contact);
-            contact.getConges().add(conge);
-            contactRepository.save(contact);
-            Conge savedConge = congeRepository.save(conge);
-            return congeMapper.congeToCongeDTO(savedConge);
-        }
-        return null; // Or handle as needed if contact is not found
+        return contactRepository.findById(congeDTO.getContactId())
+                .map(contact -> {
+                    Conge conge = congeMapper.congeDTOToConge(congeDTO);
+                    conge.setContact(contact);
+                    contact.getConges().add(conge);
+                    return congeMapper.congeToCongeDTO(congeRepository.save(conge));
+                })
+                .orElse(null);
     }
+
+
 
     public CongeDTO getCongeById(Long congeId) {
         Optional<Conge> congeOptional = congeRepository.findById(congeId);
