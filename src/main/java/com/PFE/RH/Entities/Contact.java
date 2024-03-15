@@ -29,7 +29,7 @@ public class Contact {
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
     private List<Autorisation> autorisations;
 
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conge> conges;
 
     // Getters and setters

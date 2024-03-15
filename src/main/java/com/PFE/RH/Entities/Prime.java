@@ -1,10 +1,13 @@
 package com.PFE.RH.Entities;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
+@Data
 @Table(name = "prime")
 public class Prime {
     @Id
@@ -19,8 +22,11 @@ public class Prime {
     private int month;
     private Double montant;
     private String motif;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_prime_id")
     private TypePrime typePrime;
-    // Getters and Setters (Omitted for brevity)
+
+    // Getters and setters
+    // Omitted for brevity
 }

@@ -12,7 +12,6 @@ public class CongeDTO {
     private LocalDate startDate;
     private LocalDate endDate;
     private String state;
-    @JsonIgnore
     private Long contactId; // Include contactId
 
     // Getters and setters

@@ -49,8 +49,7 @@ public interface ContactMapper {
             @Mapping(source = "year", target = "year"),
             @Mapping(source = "month", target = "month"),
             @Mapping(source = "motif", target = "motif"),
-            @Mapping(target = "typePrimeId", expression = "java(prime.getTypePrime() != null ? prime.getTypePrime().getTypePrimeId() : null)"),
-            @Mapping(target = "typePrimeCode", expression = "java(prime.getTypePrime() != null ? prime.getTypePrime().getCode() : null)")
+            @Mapping(target = "typePrimeId", expression = "java(prime.getTypePrime() != null ? prime.getTypePrime().getTypePrimeId() : null)")
     })
     PrimeDTO primeToPrimeDTO(Prime prime);
 

@@ -2,6 +2,7 @@ package com.PFE.RH.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 
@@ -22,7 +23,7 @@ public class Conge {
     @Column(nullable = false)
     private String state;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
