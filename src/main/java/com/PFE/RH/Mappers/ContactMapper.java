@@ -2,9 +2,11 @@ package com.PFE.RH.Mappers;
 
 import com.PFE.RH.DTO.AutorisationDTO;
 import com.PFE.RH.DTO.ContactDTO;
+import com.PFE.RH.DTO.CongeDTO;
 import com.PFE.RH.DTO.PrimeDTO;
 import com.PFE.RH.Entities.Autorisation;
 import com.PFE.RH.Entities.Contact;
+import com.PFE.RH.Entities.Conge;
 import com.PFE.RH.Entities.Prime;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -29,13 +31,15 @@ public interface ContactMapper {
             @Mapping(source = "contact.username", target = "username"),
             @Mapping(source = "contact.email", target = "email"),
             @Mapping(source = "contact.location", target = "location"),
-            @Mapping(source = "contact.phone", target = "phone")
+            @Mapping(source = "contact.phone", target = "phone"),
+            @Mapping(source = "contact.conges", target = "conges") // Include conges mapping
     })
     ContactDTO contactToContactDTO(Contact contact);
 
     @Mapping(target = "absences", ignore = true)
     @Mapping(target = "primes", ignore = true)
     @Mapping(target = "autorisations", ignore = true)
+    @Mapping(target = "conges", ignore = true) // Ignore conges mapping
     Contact contactDTOToContact(ContactDTO contactDTO);
 
     @Mappings({
@@ -75,4 +79,21 @@ public interface ContactMapper {
             @Mapping(source = "autorisationDTO.contactId", target = "contact.contactId")
     })
     Autorisation autorisationDTOToAutorisation(AutorisationDTO autorisationDTO);
+
+    @Mappings({
+            @Mapping(source = "congeId", target = "congeId"),
+            @Mapping(source = "startDate", target = "startDate"),
+            @Mapping(source = "endDate", target = "endDate"),
+            @Mapping(source = "state", target = "state"),
+            @Mapping(target = "contactId", ignore = true) // Ignore contactId in conges
+    })
+    CongeDTO congeToCongeDTO(Conge conge);
+
+    @Mappings({
+            @Mapping(source = "congeDTO.congeId", target = "congeId",ignore = true),
+            @Mapping(source = "congeDTO.startDate", target = "startDate"),
+            @Mapping(source = "congeDTO.endDate", target = "endDate"),
+            @Mapping(source = "congeDTO.state", target = "state")
+    })
+    Conge congeDTOToConge(CongeDTO congeDTO);
 }

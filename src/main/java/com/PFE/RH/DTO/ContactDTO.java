@@ -15,7 +15,7 @@ public class ContactDTO {
     private List<AbsenceDTO> absences = new ArrayList<>();
     private List<PrimeDTO> primes = new ArrayList<>(); // Add list of PrimeDTO
     private List<AutorisationDTO> autorisations = new ArrayList<>(); // Add list of AutorisationDTO
-
+    private List<CongeDTO> conges = new ArrayList<>(); // Add list of CongeDTO
 
     // Getters and setters
     // Omitted for brevity

@@ -1,7 +1,8 @@
 package com.PFE.RH.Entities;
-import jakarta.persistence.*;
+
 import lombok.Data;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class Contact {
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
     private List<Autorisation> autorisations;
+
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
+    private List<Conge> conges;
+
     // Getters and setters
     // Omitted for brevity
 }
