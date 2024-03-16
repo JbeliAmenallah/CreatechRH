@@ -32,6 +32,9 @@ public class Contact {
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conge> conges;
 
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cotisation> cotisations;
+
     // Getters and setters
     // Omitted for brevity
 }

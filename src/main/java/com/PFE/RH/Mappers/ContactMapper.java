@@ -26,14 +26,18 @@ public interface ContactMapper {
             @Mapping(source = "contact.email", target = "email"),
             @Mapping(source = "contact.location", target = "location"),
             @Mapping(source = "contact.phone", target = "phone"),
-            @Mapping(source = "contact.conges", target = "conges") // Include conges mapping
+            @Mapping(source = "contact.conges", target = "conges"),
+            @Mapping(source = "contact.cotisations", target = "cotisations") // Include cotisations mapping
     })
     ContactDTO contactToContactDTO(Contact contact);
 
-    @Mapping(target = "absences", ignore = true)
-    @Mapping(target = "primes", ignore = true)
-    @Mapping(target = "autorisations", ignore = true)
-    @Mapping(target = "conges", ignore = true) // Ignore conges mapping
+    @Mappings({
+            @Mapping(target = "absences", ignore = true),
+            @Mapping(target = "primes", ignore = true),
+            @Mapping(target = "autorisations", ignore = true),
+            @Mapping(target = "conges", ignore = true),
+            @Mapping(source = "cotisations", target = "cotisations") // Include cotisations mapping
+    })
     Contact contactDTOToContact(ContactDTO contactDTO);
 
     @Mappings({
@@ -54,7 +58,7 @@ public interface ContactMapper {
             @Mapping(source = "primeDTO.year", target = "year"),
             @Mapping(source = "primeDTO.month", target = "month"),
             @Mapping(source = "primeDTO.motif", target = "motif"),
-            @Mapping(target = "typePrime", ignore = true) // Ignore typePrime mapping
+            @Mapping(target = "typePrime", ignore = true)
     })
     Prime primeDTOToPrime(PrimeDTO primeDTO);
 
@@ -72,6 +76,7 @@ public interface ContactMapper {
             @Mapping(source = "autorisationDTO.contactId", target = "contact.contactId")
     })
     Autorisation autorisationDTOToAutorisation(AutorisationDTO autorisationDTO);
+
     @Mappings({
             @Mapping(source = "congeId", target = "congeId"),
             @Mapping(source = "startDate", target = "startDate"),
@@ -87,18 +92,5 @@ public interface ContactMapper {
             @Mapping(source = "congeWithHiddenContactIdDTO.state", target = "state")
     })
     Conge congeWithHiddenContactIdDTOToConge(CongeWithHiddenContactIdDTO congeWithHiddenContactIdDTO);
-    @Mappings({
-            @Mapping(source = "absenceId", target = "absenceId"),
-            @Mapping(source = "dateOfAbsence", target = "dateOfAbsence"),
-            @Mapping(source = "reason", target = "reason")
-    })
-    AbsenceWithHiddenContactIdDTO absenceToAbsenceWithHiddenContactIdDTO(Absence absence);
-
-    @Mappings({
-            @Mapping(source = "absenceWithHiddenContactIdDTO.absenceId", target = "absenceId"),
-            @Mapping(source = "absenceWithHiddenContactIdDTO.dateOfAbsence", target = "dateOfAbsence"),
-            @Mapping(source = "absenceWithHiddenContactIdDTO.reason", target = "reason")
-    })
-    Absence absenceWithHiddenContactIdDTOToAbsence(AbsenceWithHiddenContactIdDTO absenceWithHiddenContactIdDTO);
 
 }
