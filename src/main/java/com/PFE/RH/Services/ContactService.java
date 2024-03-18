@@ -34,6 +34,7 @@ public class ContactService {
         Contact savedContact = contactRepository.save(contact);
         return contactMapper.contactToContactDTO(savedContact);
     }
+
     public ContactDTO updateContact(Long id, ContactDTO updatedContactDTO) {
         Optional<Contact> optionalContact = contactRepository.findById(id);
         if (optionalContact.isPresent()) {
